@@ -1,5 +1,5 @@
 metadata:
-   name: packaged-stack
+   name: juju-run
    maintainer:
       - Michael Hudson-Doyle <michael.hudson@linaro.org>
    format: "Lava-Test-Shell Test Definition 1.0"
@@ -14,12 +14,14 @@ metadata:
 
 run:
   steps:
+    - 'if [ -z "$LAVA_JUJU_SCRIPT_URL" ]; then'
+    - '    echo "Must set LAVA_JUJU_SCRIPT_URL"'
+    - '    exit 1'
+    - 'fi'
     - "resolvconf -u"
-    - "export LAVA_RUN_TEMPEST LAVA_SLEEP_FOR_ACCESS LAVA_TESTS_TO_RUN"
+    - "export LAVA_SLEEP_FOR_ACCESS LAVA_JUJU_SCRIPT_URL"
     - "./do-packaged-stack.sh"
 
 params:
-  LAVA_RUN_TEMPEST: 'yes'
   LAVA_SLEEP_FOR_ACCESS: 'no'
-  LAVA_TESTS_TO_RUN: ''
-  COMPUTE_TARGET: '1'
+  LAVA_JUJU_SCRIPT_URL: ''
