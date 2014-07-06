@@ -55,8 +55,7 @@ if [ "$is_bootstrap" = "yes" ]; then
     sleep 10
     sudo -u ubuntu -E -s <<EOF
 mkdir ~/.juju
-sed -e "s/@BOOTSTRAP_IP@/$BOOTSTRAP_IP/" ./environments.yaml | tee ~/.juju/environments.yaml
-cp ./minimal-juju-deploy.yaml ~
+sed -e "s/@BOOTSTRAP_IP@/$BOOTSTRAP_IP/" ./environments.yaml > ~/.juju/environments.yaml
 juju bootstrap
 
 if [ -n "$MACHINE_IPS" ]; then
