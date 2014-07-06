@@ -53,7 +53,7 @@ if [ "$is_bootstrap" = "yes" ]; then
     apt-get install -y juju-core juju-deployer git lxc
     ./lxc-net.sh
     sleep 10
-    sudo -u ubuntu -E -s <<EOF
+    sudo -u ubuntu -E bash -x <<\EOF
 mkdir ~/.juju
 sed -e "s/@BOOTSTRAP_IP@/$BOOTSTRAP_IP/" ./environments.yaml > ~/.juju/environments.yaml
 juju bootstrap
