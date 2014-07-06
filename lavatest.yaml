@@ -20,7 +20,7 @@ run:
     - 'fi'
     - "resolvconf -u"
     - "export LAVA_SLEEP_FOR_ACCESS LAVA_JUJU_SCRIPT_URL"
-    - "./do-packaged-stack.sh"
+    - "./install-and-bootstrap.sh"
 
 params:
   LAVA_SLEEP_FOR_ACCESS: 'no'
