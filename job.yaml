@@ -3,11 +3,11 @@ device_group:
     count: 1
     device_type: mustang
   - role: machine
-    count: 1
+    count: 2
     device_type: mustang
 
 #device_type: mustang
-job_name: mwhudson-packagedstack
+job_name: mwhudson-juju
 timeout: 30000
 log_level: INFO
 
@@ -45,7 +45,6 @@ actions:
       testdef_repos:
         - git-repo: http://git.linaro.org/git-ro/people/michael.hudson-doyle/lava-deploy-cloudimg.git
           parameters:
-#            LAVA_CLOUD_IMG_URL: 'http://lava-leg02/~mwhudson/cloud.raw.gz'
             LAVA_CLOUD_IMG_URL: 'http://cloud-images.ubuntu.com/trusty/current/trusty-server-cloudimg-arm64-disk1.img'
       timeout: 900
 
@@ -79,12 +78,10 @@ actions:
   - command: lava_test_shell
     parameters:
       testdef_repos:
-        - git-repo: http://git.linaro.org/git-ro/people/michael.hudson-doyle/lava-openstack-juju.git
+        - git-repo: http://git.linaro.org/git-ro/people/michael.hudson-doyle/lava-mustang-juju.git
           parameters:
-            LAVA_RUN_TEMPEST: 'yes'
             LAVA_SLEEP_FOR_ACCESS: 'no'
-            LAVA_TESTS_TO_RUN: ''
-            COMPUTE_TARGET: '1'
+            LAVA_JUJU_SCRIPT_URL: ''
       timeout: 24000
 
   - command: submit_results
