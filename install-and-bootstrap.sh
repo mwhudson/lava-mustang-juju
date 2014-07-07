@@ -64,7 +64,7 @@ fi
 
 if [ "$LAVA_SLEEP_FOR_ACCESS" = "yes" ]; then
     echo "ssh to $(ip route get 8.8.8.8 | awk 'match($0, /src ([0-9.]+)/, a)  { print a[1] }')"
-    sleep 3600
+    sleep ${LAVA_SLEEP_DURATION-3600}
 fi
 
 type -p lava-sync > /dev/null && lava-sync all-done
