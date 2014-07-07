@@ -53,23 +53,13 @@ if [ "$is_bootstrap" = "yes" ]; then
     apt-get install -y juju-core juju-deployer git lxc
     $mydir/lxc-net.sh
     sleep 10
-    sudo -u ubuntu -E bash -x <<\EOF
-mkdir ~/.juju
-sed -e "s/@BOOTSTRAP_IP@/$BOOTSTRAP_IP/" ./environments.yaml > ~/.juju/environments.yaml
-juju bootstrap
-
-if [ -n "$MACHINE_IPS" ]; then
-    for machine_ip in $MACHINE_IPS; do
-        juju add-machine ssh:$machine_ip
-    done
-else
-    sleep 10
-fi
-EOF
-    exe=$(readlink -f $1)
-    shift
-    cd ~ubuntu
-    $exe "$@"
+    sudo -u ubuntu -E ./bootstrap.sh
+    if [ $# -gt 0 ]; then
+        exe=$(readlink -f $1)
+        shift
+        cd ~ubuntu
+        $exe "$@"
+    fi
 fi
 
 if [ "$LAVA_SLEEP_FOR_ACCESS" = "yes" ]; then
