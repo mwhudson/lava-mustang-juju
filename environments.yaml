@@ -4,3 +4,4 @@ environments:
     type: manual
     bootstrap-host: "@BOOTSTRAP_IP@"
     bootstrap-user: ubuntu
+    default-series: trusty
