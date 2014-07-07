@@ -55,10 +55,7 @@ if [ "$is_bootstrap" = "yes" ]; then
     sleep 10
     sudo -u ubuntu -E $mydir/bootstrap.sh
     if [ $# -gt 0 ]; then
-        exe=$(readlink -f $1)
-        shift
-        cd ~ubuntu
-        $exe "$@"
+        sudo -u ubuntu "$@"
     fi
 fi
 
