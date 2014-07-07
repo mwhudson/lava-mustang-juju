@@ -53,7 +53,7 @@ if [ "$is_bootstrap" = "yes" ]; then
     apt-get install -y juju-core juju-deployer git lxc
     $mydir/lxc-net.sh
     sleep 10
-    sudo -u ubuntu -E ./bootstrap.sh
+    sudo -u ubuntu -E $mydir/bootstrap.sh
     if [ $# -gt 0 ]; then
         exe=$(readlink -f $1)
         shift
