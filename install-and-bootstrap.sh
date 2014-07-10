@@ -55,7 +55,7 @@ if [ "$is_bootstrap" = "yes" ]; then
     sleep 10
     sudo -u ubuntu -E $mydir/bootstrap.sh
     if [ $# -gt 0 ]; then
-        sudo -u ubuntu "$@"
+        sudo -u ubuntu -E "$@"
     fi
 fi
 
@@ -64,4 +64,6 @@ if [ "$LAVA_SLEEP_FOR_ACCESS" = "yes" ]; then
     sleep ${LAVA_SLEEP_DURATION-3600}
 fi
 
-type -p lava-sync > /dev/null && lava-sync all-done
+if type -p lava-sync > /dev/null; then
+    lava-sync all-done
+fi
