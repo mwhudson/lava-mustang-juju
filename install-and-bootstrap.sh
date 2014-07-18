@@ -54,9 +54,8 @@ if [ "$is_bootstrap" = "yes" ]; then
     $mydir/lxc-net.sh
     sleep 10
     sudo -u ubuntu -E $mydir/bootstrap.sh
-    echo "install-and-bootstrap.sh" $PATH
     if [ $# -gt 0 ]; then
-        sudo -u ubuntu -E "$@"
+        sudo -u ubuntu -E PATH=$PATH "$@"
     fi
 fi
 
