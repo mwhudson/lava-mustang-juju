@@ -50,6 +50,7 @@ else
 fi
 
 if [ "$is_bootstrap" = "yes" ]; then
+    apt-get update
     apt-get install -y juju-core juju-deployer git lxc
     $mydir/lxc-net.sh
     sleep 10
