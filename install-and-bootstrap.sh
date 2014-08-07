@@ -24,6 +24,7 @@ if type -p lava-sync > /dev/null; then
 
     if [ "$(lava-group | sort  | awk '{ print $1}' | head -n1)" = "$(lava-self)" ]; then
         is_bootstrap=yes
+        do_lxc_net=yes
 
         export BOOTSTRAP_IP=$(lava-network query $(lava-self) ipv4)
         export MACHINE_IPS=
@@ -47,12 +48,15 @@ else
     export BOOTSTRAP_IP=$(ip route get 8.8.8.8 | awk 'match($0, /src ([0-9.]+)/, a)  { print a[1] }')
     export MACHINE_IPS=
     is_bootstrap=yes
+    do_lxc_net=no
 fi
 
 if [ "$is_bootstrap" = "yes" ]; then
     apt-get update
     apt-get install -y juju-core juju-deployer git lxc
-    $mydir/lxc-net.sh
+    if [ $do_lxc_net = "yes" ]; then
+        $mydir/lxc-net.sh
+    fi
     sleep 10
     sudo -u ubuntu -E $mydir/bootstrap.sh
     if [ $# -gt 0 ]; then
