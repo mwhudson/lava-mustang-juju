@@ -1,7 +1,4 @@
 device_group:
-  - role: bootstrap
-    count: 1
-    device_type: mustang
   - role: machine
     count: 2
     device_type: mustang
@@ -80,8 +77,8 @@ actions:
       testdef_repos:
         - git-repo: http://git.linaro.org/git-ro/people/michael.hudson-doyle/lava-mustang-juju.git
           parameters:
-            LAVA_SLEEP_FOR_ACCESS: 'no'
-            LAVA_JUJU_SCRIPT_URL: ''
+            LAVA_SLEEP_FOR_ACCESS: 'yes'
+            LAVA_SLEEP_DURATION: '7200'
       timeout: 24000
 
   - command: submit_results
