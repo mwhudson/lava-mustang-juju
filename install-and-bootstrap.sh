@@ -21,8 +21,9 @@ if type -p lava-sync > /dev/null; then
 
     lava-network broadcast eth0
     lava-network collect eth0
+    lava-network hosts /etc/hosts
 
-    if [ "$(lava-group | sort  | awk '{ print $1}' | head -n1)" = "$(lava-self)" ]; then
+    if [ "$(lava-group | sort  | awk '{ print $1 }' | head -n1)" = "$(lava-self)" ]; then
         is_bootstrap=yes
         do_lxc_net=yes
 
@@ -47,6 +48,7 @@ if type -p lava-sync > /dev/null; then
 else
     export BOOTSTRAP_IP=$(ip route get 8.8.8.8 | awk 'match($0, /src ([0-9.]+)/, a)  { print a[1] }')
     export MACHINE_IPS=
+    echo "127.0.0.1 $(hostname)" >> /etc/hosts
     is_bootstrap=yes
     do_lxc_net=no
 fi
